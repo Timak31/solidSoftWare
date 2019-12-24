@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:random_color/random_color.dart';
 
@@ -28,9 +30,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-  RandomColor _randomColor = new RandomColor();  
-  Color _color = Colors.white;
-
+  List<Color> _colors = [Colors.white, Colors.yellow, Colors.amber, Colors.blue, Colors.cyan, Colors.green, Colors.indigo, Colors.lime, Colors.pink];
+  Random _random = new Random();
+  int _count = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +41,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: InkWell(
         child: Container(
-          color: _color,
+          color: _colors[_count],
           child: Center(
             child: Text(
               "Hey there",
@@ -51,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         onTap: () => setState(
           () {
-            _color = _randomColor.randomColor();
+            _count = _random.nextInt(_colors.length);
           }
         ),
       )
