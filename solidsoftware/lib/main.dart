@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:random_color/random_color.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter test excersice'),
     );
   }
 }
@@ -25,13 +27,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  RandomColor _randomColor = new RandomColor();  
+  Color _color = Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -39,25 +37,24 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+      body: InkWell(
+        child: Container(
+          color: _color,
+          child: Center(
+            child: Text(
+              "Hey there",
+              style: TextStyle(
+                fontSize: 30.0
+              ), 
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onTap: () => setState(
+          () {
+            _color = _randomColor.randomColor();
+          }
+        ),
+      )
     );
   }
 }
